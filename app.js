@@ -11,7 +11,7 @@ GAME RULES:
 
 
 
-var scores, roundScore, dice, activePlayer, gamePlaying, previousValueOfDice;
+var scores, roundScore, dice, activePlayer, gamePlaying, previousValueOfDice, winningScore;
 
 init();
 
@@ -26,6 +26,7 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
 
         console.log("previousValueOfDice: " + previousValueOfDice);
         console.log("dice is : " + dice);
+        console.log(" default winning value is: "+ winningScore);
         //2. Display the result
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block';
@@ -59,8 +60,9 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
     
         // 2. update the UI
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+        console.log("Read current winning score value: " + document.getElementById('input-score').value);
         //3. Check if the player won
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= document.getElementById('input-score').value) {
             document.querySelector('#name-'+ activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';  
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner'); 
@@ -98,8 +100,11 @@ function init() {
     dice = Math.floor(Math.random() * 6) + 1;
     gamePlaying = true;
     previousValueOfDice = 0;
+    winningScore = 100;
 
     document.querySelector('.dice').style.display = 'none';
+
+    document.getElementById('input-score').textContent = 100;
     
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';

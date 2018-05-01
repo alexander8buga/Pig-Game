@@ -118,6 +118,13 @@ button {
     font-weight: 300;
     transition: background-color 0.3s, color 0.3s;
 }
+ input {
+     position: absolute;
+     width: 80px;
+     margin-top: 27px;
+     margin-left: 50px;
+     left: 50%;
+ }
 
 button:hover { font-weight: 600; }
 button:hover i { margin-right: 20px; }
@@ -137,7 +144,7 @@ i {
     transition: margin 0.3s;
 }
 
-.btn-new { top: 45px;}
+.btn-new { top: 75px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
 
