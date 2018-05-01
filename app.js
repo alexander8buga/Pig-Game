@@ -11,7 +11,7 @@ GAME RULES:
 
 
 
-var scores, roundScore, dice, activePlayer, gamePlaying;
+var scores, roundScore, dice, activePlayer, gamePlaying, previousValueOfDice;
 
 init();
 
@@ -23,19 +23,25 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
         
         //1. Random number
         var dice = Math.floor(Math.random() * 6) + 1;
+
+        console.log("previousValueOfDice: " + previousValueOfDice);
+        console.log("dice is : " + dice);
         //2. Display the result
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
         //3. Update the round score If the rolled was not 1
-        if (dice !== 1){
+        if (dice !== 1 && (dice !== 6 || previousValueOfDice !== 6)){
             // Add score
             roundScore += dice;
             document.getElementById('current-' + activePlayer).textContent = roundScore;
-    
+             // set the previousValueOfDice to the current value
+            if (previousValueOfDice  == 0 && dice == 6)
+                previousValueOfDice = dice;
             
         } else {
             //Next player
+            previousValueOfDice = 0;
             nextPlayer();
         } 
     }
@@ -91,6 +97,7 @@ function init() {
     activePlayer = 0;
     dice = Math.floor(Math.random() * 6) + 1;
     gamePlaying = true;
+    previousValueOfDice = 0;
 
     document.querySelector('.dice').style.display = 'none';
     
